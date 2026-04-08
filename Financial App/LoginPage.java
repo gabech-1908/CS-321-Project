@@ -2,6 +2,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.awt.Image;
 
 import javax.swing.Box;
@@ -75,11 +76,11 @@ public class LoginPage {
         loginArea.add(Box.createVerticalStrut(40));
 
         // logo image 
-        JLabel logoLabel = new JLabel(); // set an ImageIcon here
+        
+        // Logo with fallback paths and visible fallback text
+        JLabel logoLabel = new JLabel();
         Dimension logoSize = new Dimension(300, 120);
-        ImageIcon icon = new ImageIcon("logo.png");
-        Image scaled = icon.getImage().getScaledInstance(logoSize.width, logoSize.height,Image.SCALE_SMOOTH);
-        logoLabel.setIcon(new ImageIcon(scaled));
+        setLogoIconIfFound(logoLabel, logoSize);
         logoLabel.setPreferredSize(logoSize);
         logoLabel.setMaximumSize(logoSize);
         logoLabel.setAlignmentX(java.awt.Component.CENTER_ALIGNMENT);
@@ -92,7 +93,6 @@ public class LoginPage {
         loginButton.setAlignmentX(java.awt.Component.CENTER_ALIGNMENT);
 
         loginArea.add(loginText);
-        // push username/password further down
         loginArea.add(Box.createVerticalStrut(40));
         loginArea.add(enterUsername);
         loginArea.add(Box.createVerticalStrut(10));
@@ -104,6 +104,30 @@ public class LoginPage {
     public static JPanel getLoginArea() {
         return loginArea;
     }
+
+    private static void setLogoIconIfFound(JLabel logoLabel, Dimension logoSize) {
+    String[] candidatePaths = {
+        "logo.png",
+        "Financial App/logo.png"
+    };
+
+    for (String path : candidatePaths) {
+        File logoFile = new File(path);
+        if (logoFile.exists() && logoFile.isFile()) {
+            ImageIcon icon = new ImageIcon(logoFile.getAbsolutePath());
+            Image scaled = icon.getImage().getScaledInstance(
+                logoSize.width,
+                logoSize.height,
+                Image.SCALE_SMOOTH
+            );
+            logoLabel.setText("");
+            logoLabel.setIcon(new ImageIcon(scaled));
+            return;
+        }
+    }
+
+    logoLabel.setText("Logo not found");
+}
 
     private static boolean isPasswordValid() {
         if (password.length != 5) {
