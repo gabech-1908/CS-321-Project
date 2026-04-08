@@ -23,10 +23,13 @@ public class Main{
         LoginPage.initLoginPage();
         HomePage.initHomePage();
         WeeklyOverviewPage.initWeeklyOverviewPage();
+        MonthlyOverviewPage.initMonthlyOverviewPage();
+
         //add pages to app
         app.add(LoginPage.getLoginArea());
         app.add(HomePage.getHomeArea());
         app.add(WeeklyOverviewPage.getWeeklyOverviewArea());
+        app.add(MonthlyOverviewPage.getMonthlyOverviewArea());
 
         //make sure relevent pages are visible
         LoginPage.getLoginArea().setVisible(true);
