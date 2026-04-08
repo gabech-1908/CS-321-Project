@@ -20,9 +20,9 @@ public class HomePage {
         //buttons
         weeklyOverviewButton = new JButton("Weekly Overview");
 
-        //might need several action listener classes?
         weeklyOverviewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e){
+                switchOutOfHome();
                 //switch to weekly overview page
                 WeeklyOverviewPage.switchToWeeklyOverview();
             }
@@ -43,5 +43,9 @@ public class HomePage {
         homeArea.setVisible(true);
         weeklyOverviewButton.setVisible(true);
         mainText.setVisible(true);
+    }
+
+    public static void switchOutOfHome(){
+        homeArea.setVisible(false);
     }
 }

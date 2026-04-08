@@ -22,9 +22,11 @@ public class Main{
         //initialize pages
         LoginPage.initLoginPage();
         HomePage.initHomePage();
+        WeeklyOverviewPage.initWeeklyOverviewPage();
         //add pages to app
         app.add(LoginPage.getLoginArea());
         app.add(HomePage.getHomeArea());
+        app.add(WeeklyOverviewPage.getWeeklyOverviewArea());
 
         //make sure relevent pages are visible
         LoginPage.getLoginArea().setVisible(true);
