@@ -8,7 +8,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 public class WeeklyOverviewPage {
     private static JPanel weeklyOverviewArea;
@@ -30,7 +29,7 @@ public class WeeklyOverviewPage {
         // hard code weekly avg
         weeklyAvg = 65.00;
         dateArea = new JTextArea("Week: 4/5/2026 - 4/11/2026");
-        weeklyAvgArea = new JTextArea("Weekly Average Spending: $" + weeklyAvg);
+        weeklyAvgArea = new JTextArea("Weekly Spending Avg: $" + weeklyAvg);
 
         // larger font for readability
         Font bigFont = new Font("SansSerif", Font.PLAIN, 18);
@@ -54,14 +53,50 @@ public class WeeklyOverviewPage {
         sat.setFont(bigFont);
         sun.setFont(bigFont);
 
-        displayExpensesArea.setLayout(new GridLayout(7, 1));
+        //hardcode values for purchases during week for now
+        JTextArea purchase1Expense = new JTextArea("Lunch");
+        JTextArea purchase2Expense = new JTextArea("Gas");
+        JTextArea purchase3Expense = new JTextArea("Groceries");
+
+        JTextArea purhcase1Amount = new JTextArea("$10.00");
+        JTextArea purhcase2Amount = new JTextArea("$50.00");
+        JTextArea purchase3Amount = new JTextArea("$70.00");
+
+        displayExpensesArea.setLayout(new GridLayout(7, 3));
         displayExpensesArea.add(mon);
+        
+        displayExpensesArea.add(purchase1Expense);
+        displayExpensesArea.add(purhcase1Amount);
+
         displayExpensesArea.add(tue);
+        // "padding" so everything adds into the layout right
+        displayExpensesArea.add(new JTextArea());
+        displayExpensesArea.add(new JTextArea());
+
         displayExpensesArea.add(wed);
+
+        displayExpensesArea.add(purchase2Expense);
+        displayExpensesArea.add(purhcase2Amount);
+
         displayExpensesArea.add(thu);
+
+        displayExpensesArea.add(purchase3Expense);
+        displayExpensesArea.add(purchase3Amount);
+
+
         displayExpensesArea.add(fri);
+        displayExpensesArea.add(new JTextArea());
+        displayExpensesArea.add(new JTextArea());
+
         displayExpensesArea.add(sat);
+        
+        displayExpensesArea.add(new JTextArea());
+        displayExpensesArea.add(new JTextArea());
+
         displayExpensesArea.add(sun);
+        displayExpensesArea.add(new JTextArea());
+        displayExpensesArea.add(new JTextArea());
+
 
         // stack a top bar, date, weekly average, and the days panel vertically
         weeklyOverviewArea.setLayout(new BoxLayout(weeklyOverviewArea, BoxLayout.Y_AXIS));
