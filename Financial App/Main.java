@@ -1,3 +1,7 @@
+//to run
+//javac -cp ".;lib/sqlite-jdbc-3.53.0.0.jar;lib/flatlaf-3.7.1.jar;lib/flatlaf-intellij-themes-3.7.1.jar" *.java
+//java -cp ".;lib/sqlite-jdbc-3.53.0.0.jar;lib/flatlaf-3.7.1.jar;lib/flatlaf-intellij-themes-3.7.1.jar" Main
+
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;
