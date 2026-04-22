@@ -141,7 +141,7 @@ public class HomePage {
                                     .addComponent(signOutButton)
                                         
                         )
-                        .addComponent(tabs, 200, 250, 300)
+                        .addComponent(tabs, 200, 250, Short.MAX_VALUE)
                         .addGap(20)
                         .addGroup(
                                 layout.createParallelGroup(GroupLayout.Alignment.CENTER)
