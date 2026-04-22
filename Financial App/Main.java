@@ -23,7 +23,7 @@ public class Main{
         
         //initialize app
         JPanel app = new JPanel();
-        app.setSize(350, 700);
+        app.setSize(500, 700);
         app.setVisible(true);
         phone.add(app, BorderLayout.CENTER);
         //initialize pages
