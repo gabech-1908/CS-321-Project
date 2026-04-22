@@ -18,7 +18,6 @@ public class HomePage {
     private static JLabel mainText;
     private static JButton subscriptionButton;
     private static JButton incomeButton;
-    private static JButton overviewButton;
     private static JButton spendingButton;
     private static JPanel weeklyTabPanel;
     private static JPanel monthlyTabPanel;
@@ -45,7 +44,6 @@ public class HomePage {
         signOutButton = new JButton("Sign Out");
         subscriptionButton = new JButton("Add Subscriptions");
         incomeButton = new JButton("Add Income");
-        overviewButton = new JButton("Overview (Tabs)"); 
         spendingButton = new JButton("Add Spending");
 
         JTabbedPane tabs = new JTabbedPane();
@@ -77,13 +75,6 @@ public class HomePage {
                 switchOutOfHome();
                 // switch to login page
                 LoginPage.switchToLogin();
-            }
-        });
-
-        overviewButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                switchOutOfHome();
-                OverviewPage.switchToOverview();
             }
         });
 
