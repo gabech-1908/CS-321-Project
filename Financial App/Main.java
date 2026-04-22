@@ -33,7 +33,6 @@ public class Main{
         MonthlyOverviewPage.initMonthlyOverviewPage();
         SubscriptionPage.initSubscriptionPage();
         IncomePage.initIncomePage();
-        OverviewPage.initOverviewPage();
         SpendingPage.initSpendingPage();
 
         //add pages to app
@@ -43,7 +42,6 @@ public class Main{
         app.add(MonthlyOverviewPage.getMonthlyOverviewArea());
         app.add(SubscriptionPage.getSubscriptionArea());
         app.add(IncomePage.getIncomeArea());
-        app.add(OverviewPage.getOverviewArea());
         app.add(SpendingPage.getSpendingArea());
 
         //make sure relevent pages are visible
