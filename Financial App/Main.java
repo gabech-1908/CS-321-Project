@@ -3,11 +3,18 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+//import to make the interface look better
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMTGitHubIJTheme;
+
+
 public class Main{
 
 
     public static void main(String[] args) {
         //initialize frame
+        FlatMTGitHubIJTheme.setup(); //start the ui
+        Database.init(); // initialize database connection and tables
+        
         //might not need this one
         JFrame phone = new JFrame("Our Financial App");
         phone.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,12 +31,20 @@ public class Main{
         HomePage.initHomePage();
         WeeklyOverviewPage.initWeeklyOverviewPage();
         MonthlyOverviewPage.initMonthlyOverviewPage();
+        SubscriptionPage.initSubscriptionPage();
+        IncomePage.initIncomePage();
+        OverviewPage.initOverviewPage();
+        SpendingPage.initSpendingPage();
 
         //add pages to app
         app.add(LoginPage.getLoginArea());
         app.add(HomePage.getHomeArea());
         app.add(WeeklyOverviewPage.getWeeklyOverviewArea());
         app.add(MonthlyOverviewPage.getMonthlyOverviewArea());
+        app.add(SubscriptionPage.getSubscriptionArea());
+        app.add(IncomePage.getIncomeArea());
+        app.add(OverviewPage.getOverviewArea());
+        app.add(SpendingPage.getSpendingArea());
 
         //make sure relevent pages are visible
         LoginPage.getLoginArea().setVisible(true);
