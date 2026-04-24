@@ -16,9 +16,12 @@ public class HomePage {
     private static JButton monthlyOverviewButton;
     private static JButton signOutButton;
     private static JLabel mainText;
+
     private static JButton subscriptionButton;
     private static JButton incomeButton;
     private static JButton spendingButton;
+    private static JButton savingsButton;
+
     private static JPanel weeklyTabPanel;
     private static JPanel monthlyTabPanel;
 
@@ -45,6 +48,7 @@ public class HomePage {
         subscriptionButton = new JButton("Add Subscriptions");
         incomeButton = new JButton("Add Income");
         spendingButton = new JButton("Add Spending");
+        savingsButton = new JButton("Add Savings");
 
         JTabbedPane tabs = new JTabbedPane();
         tabs.setFont(new Font("SansSerif", Font.PLAIN, 16));
@@ -83,6 +87,11 @@ public class HomePage {
                 switchOutOfHome();
                 SpendingPage.switchToSpending();
             }
+        });
+
+        savingsButton.addActionListener(e ->{
+            switchOutOfHome();
+            TrackSavingsPage.swtichToTrackSavings();
         });
 
         subscriptionButton.addActionListener(e -> {
@@ -127,6 +136,7 @@ public class HomePage {
                 .addGroup(
                     layout.createSequentialGroup()
                         .addComponent(spendingButton)
+                        .addComponent(savingsButton)
                 )
         );
 
@@ -158,6 +168,7 @@ public class HomePage {
                         .addGroup(
                             layout.createParallelGroup(GroupLayout.Alignment.CENTER)
                                 .addComponent(spendingButton)
+                                .addComponent(savingsButton)
                         )
         );
 

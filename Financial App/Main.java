@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 //import to make the interface look better
-import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMTGitHubIJTheme;
+//import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMTGitHubIJTheme;
 
 
 public class Main{
@@ -16,7 +16,7 @@ public class Main{
 
     public static void main(String[] args) {
         //initialize frame
-        FlatMTGitHubIJTheme.setup(); //start the ui
+        //FlatMTGitHubIJTheme.setup(); //start the ui
         Database.init(); // initialize database connection and tables
         
         //might not need this one
@@ -38,6 +38,8 @@ public class Main{
         SubscriptionPage.initSubscriptionPage();
         IncomePage.initIncomePage();
         SpendingPage.initSpendingPage();
+        TrackSavingsPage.initTrackSavings();
+        AddSavingGoalsPage.initAddSavingsGoals();
 
         //add pages to app
         app.add(LoginPage.getLoginArea());
@@ -47,6 +49,8 @@ public class Main{
         app.add(SubscriptionPage.getSubscriptionArea());
         app.add(IncomePage.getIncomeArea());
         app.add(SpendingPage.getSpendingArea());
+        app.add(TrackSavingsPage.getTrackSavingsArea());
+        app.add(AddSavingGoalsPage.getAddSavingsArea());
 
         //make sure relevent pages are visible
         LoginPage.getLoginArea().setVisible(true);
