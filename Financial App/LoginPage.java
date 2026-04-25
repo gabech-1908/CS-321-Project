@@ -52,8 +52,14 @@ public class LoginPage {
             public void actionPerformed(ActionEvent e) {
                 username = enterUsername.getText();
                 password = enterPassword.getPassword();
+                //TODO: see if username and password match anything from database
+                //potentially need loop around if statement
+                
                 // if username and password are correct, switch to the homepage
                 if (username.equals("admin") && isPasswordValid()) {
+                    //reset text in textfields
+                    enterUsername.setText("Username");
+                    enterPassword.setText("Password");
                     // switch to homepage
                     switchToHome();
                     HomePage.switchToHome();
@@ -130,6 +136,7 @@ public class LoginPage {
 }
 
     private static boolean isPasswordValid() {
+        //TODO after getting username, check user's password
         if (password.length != 5) {
             System.out.println(password.length);
             return false;

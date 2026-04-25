@@ -18,6 +18,14 @@ public class User {
         return password;
     }
 
+    public static void setUsername(String n){
+        username = n;
+    }
+
+    public static void setPassword(char[] p){
+        password = p;
+    }
+
     public static void addSavingsGoal(SavingGoal sg){
         savingGoals.add(sg);
     }

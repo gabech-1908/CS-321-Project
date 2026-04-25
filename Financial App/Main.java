@@ -12,13 +12,11 @@ import javax.swing.JPanel;
 
 
 public class Main{
-
-
     public static void main(String[] args) {
         //initialize frame
         //FlatMTGitHubIJTheme.setup(); //start the ui
         Database.init(); // initialize database connection and tables
-        
+
         //might not need this one
         JFrame phone = new JFrame("Our Financial App");
         phone.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
