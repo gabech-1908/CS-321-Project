@@ -22,14 +22,8 @@ public class AddSavingGoalsPage {
     private static JTextField goalDeadline;
 
     private static JButton setGoal;
-    /**
-     * to store savings goals made. 
-     * could be stored in database.
-     */
-    private static LinkedList<SavingGoal> goals;
 
     public static void initAddSavingsGoals(){
-        goals = new LinkedList<>();
         addSavingsLabel = new JTextArea("Fill in goal amount and name");
         goalAmountLabel = new JTextArea("Goal Amount");
         nameOfGoalLabel = new JTextArea("Name");
@@ -61,9 +55,9 @@ public class AddSavingGoalsPage {
                 }
 
                 if(deadline != null){
-                    goals.add(new SavingGoal(amount, name, deadline));
+                    User.addSavingsGoal(new SavingGoal(amount, name, deadline));
                 } else{
-                    goals.add(new SavingGoal(amount, name));
+                    User.addSavingsGoal(new SavingGoal(amount, name));
                 }
                 switchFromAddSavingsGoals();
                 TrackSavingsPage.swtichToTrackSavings();
