@@ -37,6 +37,8 @@ public class TrackSavingsPage {
         trackSavingsArea.add(savingNameLabel);
         //TODO: need to display savings goals that have been set
 
+        //TODO: add option to remove savings goals after they've been fulfilled
+
         trackSavingsArea.setVisible(false);
     }
 

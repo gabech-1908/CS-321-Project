@@ -18,7 +18,7 @@ public class IncomePage {
             this.amount = amount;
         }
     }
- 
+
     private static JPanel incomeArea;
     private static JTextField sourceInput;
     private static JTextField amountInput;

@@ -3,6 +3,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.LinkedList;
 import java.awt.Image;
 
 import javax.swing.Box;
@@ -60,6 +61,13 @@ public class LoginPage {
                     //reset text in textfields
                     enterUsername.setText("Username");
                     enterPassword.setText("Password");
+
+                    //TODO: grab related data from database
+                    LinkedList<SavingGoal> sg = new LinkedList<>();
+                    double b = 0;
+                    // update current user
+                    User.initUser(sg, b);
+
                     // switch to homepage
                     switchToHome();
                     HomePage.switchToHome();

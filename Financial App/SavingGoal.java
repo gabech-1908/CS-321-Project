@@ -1,10 +1,10 @@
 import java.sql.Date;
 
 public class SavingGoal {
-    private float goalAmount;
+    private double goalAmount;
     private String name;
     private Date deadline;
-    private float amountSaved;
+    private double amountSaved;
 
     public SavingGoal(float ga, String n){
         goalAmount = ga;
@@ -17,20 +17,23 @@ public class SavingGoal {
         deadline = dl;
     }
 
-    public float goalProgress(){
+    public double goalProgress(){
         return amountSaved/goalAmount;
     }
-    
 
     public String getName(){
         return name;
     }
     
-    public float getGoalAmount(){
+    public double getGoalAmount(){
         return goalAmount;
     }
 
     public Date getDeadline(){
         return deadline;
+    }
+
+    public boolean goalMet(){
+        return goalProgress() >= 1;
     }
 }

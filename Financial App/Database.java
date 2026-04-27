@@ -94,6 +94,7 @@ public class Database {
             PreparedStatement ps = conn.prepareStatement(
                 "INSERT INTO income (source, amount) VALUES (?, ?)"
             );
+            User.setBalance(User.getBalance() + amount);
             ps.setString(1, source);
             ps.setDouble(2, amount);
             ps.executeUpdate();
