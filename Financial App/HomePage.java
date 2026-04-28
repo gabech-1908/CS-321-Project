@@ -254,7 +254,7 @@ public class HomePage {
     private static JPanel buildMonthlyPanel() {
         JPanel panel = new JPanel(new BorderLayout());
  
-        List<SubscriptionPage.Subscription> subs = Database.getSubscriptions();
+        List<Subscription> subs = User.getSubscriptions();
         List<SpendingPage.SpendingEntry> spending = Database.getSpending();
  
         if (subs.isEmpty() && spending.isEmpty()) {
@@ -267,8 +267,8 @@ public class HomePage {
         // build pie chart from subscription data
        java.util.LinkedHashMap<String, Double> combined = new java.util.LinkedHashMap<>();
 
-        for (SubscriptionPage.Subscription s : subs) {
-            combined.merge(s.title, toMonthly(s.amount, s.frequency), Double::sum);
+        for (Subscription s : subs) {
+            combined.merge(s.getTitle(), toMonthly(s.getAmount(), s.getFrequency()), Double::sum);
         }
         for (SpendingPage.SpendingEntry e : spending) {
             combined.merge(e.description, e.amount, Double::sum);

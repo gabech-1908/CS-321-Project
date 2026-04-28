@@ -64,9 +64,10 @@ public class LoginPage {
 
                     //TODO: grab related data from database
                     LinkedList<SavingGoal> sg = new LinkedList<>();
+                    LinkedList<Subscription> s = new LinkedList<>();
                     double b = 0;
                     // update current user
-                    User.initUser(sg, b);
+                    User.initUser(sg, b, s);
 
                     // switch to homepage
                     switchToHome();

@@ -61,14 +61,14 @@ public class Database {
         }
     }
  
-    public static List<SubscriptionPage.Subscription> getSubscriptions() {
-        List<SubscriptionPage.Subscription> list = new ArrayList<>();
+    public static List<Subscription> getSubscriptions() {
+        List<Subscription> list = new ArrayList<>();
         try {
             ResultSet rs = conn.createStatement().executeQuery(
                 "SELECT title, amount, frequency FROM subscriptions"
             );
             while (rs.next()) {
-                list.add(new SubscriptionPage.Subscription(
+                list.add(new Subscription(
                     rs.getString("title"),
                     rs.getDouble("amount"),
                     rs.getString("frequency")
@@ -82,8 +82,8 @@ public class Database {
  
     public static double getTotalMonthlySubscriptions() {
         double total = 0;
-        for (SubscriptionPage.Subscription s : getSubscriptions()) {
-            total += toMonthly(s.amount, s.frequency);
+        for (Subscription s : User.getSubscriptions()) {
+            total += toMonthly(s.getAmount(), s.getFrequency());
         }
         return total;
     }
