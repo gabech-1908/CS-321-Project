@@ -3,23 +3,11 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
 import java.util.List;
 import javax.swing.*;
 
 public class SubscriptionPage {
- 
-    // simple class to store one subscription
-    public static class Subscription {
-        public String title;
-        public double amount;
-        public String frequency;
- 
-        Subscription(String title, double amount, String frequency) {
-            this.title = title;
-            this.amount = amount;
-            this.frequency = frequency;
-        }
-    }
  
     private static JPanel subscriptionsArea;
     private static JTextField titleInput;
@@ -135,18 +123,16 @@ public class SubscriptionPage {
     }
  
     private static void refreshList() {
-        List<Subscription> subscriptions = Database.getSubscriptions();
-
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("%-20s %-10s %s%n", "Service", "Amount", "Frequency"));
         sb.append("-".repeat(45)).append("\n");
  
         double monthlyTotal = 0;
-        for (Subscription s : subscriptions) {
-            sb.append(String.format("%-20s $%-9.2f %s%n", s.title, s.amount, s.frequency));
-            monthlyTotal += toMonthly(s.amount, s.frequency);
+        for (Subscription s : User.getSubscriptions()) {
+            sb.append(String.format("%-20s $%-9.2f %s%n", s.getTitle(), s.getAmount(), s.getFrequency()));
+            monthlyTotal += toMonthly(s.getAmount(), s.getFrequency());
         }
-        if (subscriptions.isEmpty()) {
+        if (User.getSubscriptions().isEmpty()) {
             sb.append("No subscriptions added yet.");
         }
 
