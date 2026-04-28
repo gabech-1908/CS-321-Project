@@ -23,6 +23,7 @@ public class LoginPage {
     private static JTextField enterUsername;
     private static JPasswordField enterPassword;
     private static JButton loginButton;
+    private static JButton signUpButton;
     private static JPanel loginArea;
     private static JTextArea loginText;
 
@@ -32,6 +33,7 @@ public class LoginPage {
         enterUsername = new JTextField("Username");
         enterPassword = new JPasswordField("Password");
         loginButton = new JButton("Login");
+        signUpButton = new JButton("Sign Up");
         loginText = new JTextArea("Enter username and password to login");
 
         // larger font for readability
@@ -39,6 +41,7 @@ public class LoginPage {
         enterUsername.setFont(bigFont);
         enterPassword.setFont(bigFont);
         loginButton.setFont(bigFont);
+        signUpButton.setFont(bigFont);
         loginText.setFont(bigFont);
 
         // limit width of username/password fields
@@ -79,6 +82,12 @@ public class LoginPage {
             }
         });
 
+        signUpButton.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e){
+                switchToSignUp();
+            }
+        });
+
         enterUsername.setVisible(true);
         enterPassword.setVisible(true);
         loginText.setVisible(true);
@@ -114,6 +123,7 @@ public class LoginPage {
         loginArea.add(enterPassword);
         loginArea.add(Box.createVerticalStrut(20));
         loginArea.add(loginButton);
+        loginArea.add(signUpButton);
     }
 
     public static JPanel getLoginArea() {
@@ -160,7 +170,10 @@ public class LoginPage {
         return true;
     }
     
-
+    public static void switchToSignUp(){
+        loginArea.setVisible(false);
+        SignUpPage.switchToSignUpPage();
+    }
 
     public static void switchToHome() {
         loginArea.setVisible(false);
