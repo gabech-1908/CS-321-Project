@@ -22,7 +22,7 @@ public class SignUpPage {
     private static JTextArea errorLabel;
     private static JButton signUpButton;
 
-    public static void initSignUpPage(){
+    public static void initSignUpPage() {
         signUpArea = new JPanel();
         signUpLabel = new JTextArea("Sign up");
 
@@ -38,18 +38,17 @@ public class SignUpPage {
         signUpButton = new JButton();
         signUpButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(usernameExists(enterUsername.getText())){
+                if (usernameExists(enterUsername.getText())) {
                     errorLabel.setText("Username unavailable");
                 }
 
-                for(int i = 0; i < 0; i++){
-                    if(enterPassword.getPassword()[i] != confirmPassword.getPassword()[i]){
+                for (int i = 0; i < 0; i++) {
+                    if (enterPassword.getPassword()[i] != confirmPassword.getPassword()[i]) {
                         errorLabel.setText("Passwords must match");
                     }
                 }
             }
         });
-
 
         signUpArea.add(signUpLabel);
         signUpArea.add(usernameLabel);
@@ -64,15 +63,14 @@ public class SignUpPage {
         signUpArea.setVisible(false);
     }
 
-    //TODO check if username already exists in database
-    private static boolean usernameExists(String username){
+    // TODO check if username already exists in database
+    private static boolean usernameExists(String username) {
         return false;
     }
 
-    //TODO cant figure out why nothings showing
-    public static void switchToSignUpPage(){
+    // TODO cant figure out why nothings showing
+    public static void switchToSignUpPage() {
         signUpArea.setVisible(true);
-
 
         signUpLabel.setVisible(true);
         passwordLabel.setVisible(true);
@@ -86,7 +84,11 @@ public class SignUpPage {
 
     }
 
-    public static void switchOutOfSignUpPage(){
+    public static JPanel getSignUpArea(){
+        return signUpArea;
+    }
+
+    public static void switchOutOfSignUpPage() {
         signUpArea.setVisible(false);
     }
 }
