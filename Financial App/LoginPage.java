@@ -53,7 +53,7 @@ public class LoginPage {
                 username = enterUsername.getText();
                 password = enterPassword.getPassword();
 
-                if (username.equals("admin") && isPasswordValid()) {
+                if (Database.checkLogin(username.trim(), new String(password))) {
                     enterUsername.setText("Username");
                     enterPassword.setText("Password");
 
@@ -63,6 +63,7 @@ public class LoginPage {
                     double b = 0;
 
                     User.initUser(sg, b, s, se);
+                    User.setUsername(username.trim());
 
                     switchToHome();
                     HomePage.switchToHome();
@@ -148,22 +149,6 @@ public class LoginPage {
         } else {
             logoLabel.setText("Logo not found");
         }
-    }
-
-    private static boolean isPasswordValid() {
-        if (password.length != 5) {
-            return false;
-        }
-
-        char[] pass = { 'a', 'd', 'm', 'i', 'n' };
-
-        for (int i = 0; i < pass.length; i++) {
-            if (pass[i] != password[i]) {
-                return false;
-            }
-        }
-
-        return true;
     }
 
     public static void switchToSignUp() {

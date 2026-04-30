@@ -1,6 +1,7 @@
 import java.util.LinkedList;
 
 public class User {
+    private static int userId = -1;
     private static String username;
     private static char[] password;
     private static LinkedList<SavingGoal> savingGoals;
@@ -17,6 +18,9 @@ public class User {
         subscriptions = new LinkedList<>();
         spendingEntries = new LinkedList<>();
     }
+
+    public static int getUserId() { return userId; }
+    public static void setUserId(int id) { userId = id; }
 
     public static String getUsername(){
         return username;

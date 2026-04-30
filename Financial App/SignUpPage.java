@@ -147,7 +147,16 @@ public class SignUpPage {
         } else if (usernameExists(username)) {
             errorLabel.setText("Username unavailable");
         } else {
-            errorLabel.setText("Account created");
+            boolean created = Database.addUser(username, new String(password));
+            if (created) {
+                enterUsername.setText("");
+                enterPassword.setText("");
+                confirmPassword.setText("");
+                switchOutOfSignUpPage();
+                LoginPage.switchToLogin();
+            } else {
+                errorLabel.setText("Could not create account. Try again.");
+            }
         }
 
         Arrays.fill(password, '\0');
@@ -161,7 +170,7 @@ public class SignUpPage {
     }
 
     private static boolean usernameExists(String username) {
-        return false;
+        return Database.userExists(username);
     }
 
     public static void switchToSignUpPage() {
