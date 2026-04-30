@@ -87,6 +87,18 @@ public class Database {
         }
         return total;
     }
+
+   public static void deleteSubscription(String title) {
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                "DELETE FROM subscriptions WHERE title = ?"
+            );
+            ps.setString(1, title);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Error deleting subscription: " + e.getMessage());
+        }
+    }
  
     //income 
         public static void addIncome(String source, double amount) {
@@ -169,6 +181,18 @@ public class Database {
             total += e.amount;
         }
         return total;
+    }
+
+    public static void deleteSpending(String description) {
+        try {
+            PreparedStatement ps = conn.prepareStatement(
+                "DELETE FROM spending WHERE description = ?"
+            );
+            ps.setString(1, description);
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Error deleting spending: " + e.getMessage());
+        }
     }
 
     private static double toMonthly(double amount, String frequency) {
