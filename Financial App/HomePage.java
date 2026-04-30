@@ -254,7 +254,7 @@ public class HomePage {
     private static JPanel buildMonthlyPanel() {
         JPanel panel = new JPanel(new BorderLayout());
  
-        List<Subscription> subs = User.getSubscriptions();
+        List<Subscription> subs = Database.getSubscriptions();
         List<SpendingPage.SpendingEntry> spending = Database.getSpending();
  
         if (subs.isEmpty() && spending.isEmpty()) {
