@@ -35,12 +35,12 @@ public class AddSavingGoalsPage {
 
         setGoal = new JButton("Set Goal");
         setGoal.addActionListener(new ActionListener() {
-            float amount = -1;
+            double amount = -1;
             String name;
             Date deadline = new Date(0);
             public void actionPerformed(ActionEvent e) {
                 if(goalAmount.getText() != null){
-                    amount = Float.parseFloat(goalAmount.getText());
+                    amount = Double.parseDouble(goalAmount.getText());
                 }
 
                 if(nameOfGoal.getText() != null){

@@ -13,9 +13,8 @@ public class TrackSavingsPage {
     private static JTextArea savingAmountLabel;
     private static JTextArea savingNameLabel;
     private static JButton addSavings;
-    
 
-    public static void initTrackSavings(){
+    public static void initTrackSavings() {
         trackSavingsArea = new JPanel();
 
         trackSavingsLabel = new JTextArea("Savings");
@@ -24,7 +23,7 @@ public class TrackSavingsPage {
 
         addSavings = new JButton("Add Goals");
         addSavings.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e){
+            public void actionPerformed(ActionEvent e) {
                 switchFromTrackSavings();
                 AddSavingGoalsPage.switchToAddSavingGoals();
             }
@@ -47,7 +46,7 @@ public class TrackSavingsPage {
         });
         topPanel.add(backButton, BorderLayout.WEST);
         topPanel.add(signoutButton, BorderLayout.EAST);
-        
+        trackSavingsArea.setVisible(false);
         trackSavingsArea.setLayout(new GridLayout(2, 2));
 
         trackSavingsArea.add(trackSavingsLabel);
@@ -55,23 +54,46 @@ public class TrackSavingsPage {
 
         trackSavingsArea.add(savingAmountLabel);
         trackSavingsArea.add(savingNameLabel);
-        //TODO: need to display savings goals that have been set
-
-        //TODO: add option to remove savings goals after they've been fulfilled
-
-        trackSavingsArea.setVisible(false);
+        refreshTrackSavings();
     }
-
 
     public static void swtichToTrackSavings() {
         trackSavingsArea.setVisible(true);
+        refreshTrackSavings();
     }
 
-    public static void switchFromTrackSavings(){
+    public static void switchFromTrackSavings() {
         trackSavingsArea.setVisible(false);
     }
-    
-    public static JPanel getTrackSavingsArea(){
+
+    public static JPanel getTrackSavingsArea() {
         return trackSavingsArea;
+    }
+
+    public static void refreshTrackSavings() {
+        trackSavingsArea.removeAll();
+        trackSavingsArea.add(trackSavingsLabel);
+        trackSavingsArea.add(addSavings);
+        trackSavingsArea.add(savingAmountLabel);
+        trackSavingsArea.add(savingNameLabel);
+        if (User.getSavingGoals() != null) {
+            for (SavingGoal sg : User.getSavingGoals()) {
+                JTextArea goalName = new JTextArea(sg.getName());
+                JTextArea goalAmount = new JTextArea("$" + sg.getGoalAmount());
+                JButton removeGoal = new JButton("Remove Goal");
+                removeGoal.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        User.removeSavingsGoal(sg.getName());
+                        refreshTrackSavings();
+                    }
+                });
+                trackSavingsArea.add(goalName);
+                trackSavingsArea.add(goalAmount);
+                trackSavingsArea.add(removeGoal);
+            }
+
+        }
+        trackSavingsArea.revalidate();
+        trackSavingsArea.repaint();
     }
 }

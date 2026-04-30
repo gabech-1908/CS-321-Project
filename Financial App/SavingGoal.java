@@ -6,12 +6,12 @@ public class SavingGoal {
     private Date deadline;
     private double amountSaved;
 
-    public SavingGoal(float ga, String n){
+    public SavingGoal(double ga, String n){
         goalAmount = ga;
         name = n;
     }
 
-    public SavingGoal(float ga, String n, Date dl){
+    public SavingGoal(double ga, String n, Date dl){
         goalAmount = ga;
         name = n;
         deadline = dl;

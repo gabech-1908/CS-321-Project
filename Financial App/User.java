@@ -1,7 +1,5 @@
 import java.util.LinkedList;
 
-import javax.sound.sampled.Line;
-
 public class User {
     private static String username;
     private static char[] password;
@@ -51,8 +49,13 @@ public class User {
         savingGoals.add(sg);
     }
 
-    public static void removeSavingsGoal(SavingGoal sg){
-        savingGoals.remove(sg);
+    public static void removeSavingsGoal(String name){
+        for (SavingGoal sg : savingGoals) {
+            if (sg.getName().equals(name)) {
+                savingGoals.remove(sg);
+                return;
+            }
+        }
     }
     public static void addSubscription(Subscription s){
         subscriptions.add(s);
