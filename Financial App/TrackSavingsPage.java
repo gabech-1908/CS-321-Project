@@ -1,25 +1,47 @@
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.BorderLayout;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
+import javax.swing.JScrollPane;
 
 public class TrackSavingsPage {
     private static JPanel trackSavingsArea;
-    private static JTextArea trackSavingsLabel;
-    private static JTextArea savingAmountLabel;
-    private static JTextArea savingNameLabel;
+    private static JPanel listPanel;
+
+    private static JLabel trackSavingsLabel;
     private static JButton addSavings;
 
     public static void initTrackSavings() {
-        trackSavingsArea = new JPanel();
+        trackSavingsArea = new JPanel(new BorderLayout());
 
-        trackSavingsLabel = new JTextArea("Savings");
-        savingAmountLabel = new JTextArea("Amount");
-        savingNameLabel = new JTextArea("Name");
+        JPanel topPanel = new JPanel(new BorderLayout());
+
+        JButton backButton = new JButton("Home");
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                switchFromTrackSavings();
+                HomePage.switchToHome();
+            }
+        });
+
+        JButton signoutButton = new JButton("Sign Out");
+        signoutButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                switchFromTrackSavings();
+                LoginPage.switchToLogin();
+            }
+        });
+
+        topPanel.add(backButton, BorderLayout.WEST);
+        topPanel.add(signoutButton, BorderLayout.EAST);
+
+        JPanel centerPanel = new JPanel(new BorderLayout());
+
+        trackSavingsLabel = new JLabel("Savings Goals", JLabel.CENTER);
 
         addSavings = new JButton("Add Goals");
         addSavings.addActionListener(new ActionListener() {
@@ -29,37 +51,25 @@ public class TrackSavingsPage {
             }
         });
 
-        JPanel topPanel = new JPanel(new BorderLayout());
-        JButton backButton = new JButton("Home");
-        backButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                switchFromTrackSavings();
-                HomePage.switchToHome();
-            }
-        });
-        JButton signoutButton = new JButton("Sign Out");
-        signoutButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                switchFromTrackSavings();
-                LoginPage.switchToLogin();
-            }
-        });
-        topPanel.add(backButton, BorderLayout.WEST);
-        topPanel.add(signoutButton, BorderLayout.EAST);
+        JPanel headerPanel = new JPanel(new BorderLayout());
+        headerPanel.add(trackSavingsLabel, BorderLayout.CENTER);
+        headerPanel.add(addSavings, BorderLayout.EAST);
+
+        listPanel = new JPanel(new GridLayout(0, 3, 10, 10));
+
+        centerPanel.add(headerPanel, BorderLayout.NORTH);
+        centerPanel.add(new JScrollPane(listPanel), BorderLayout.CENTER);
+
+        trackSavingsArea.add(topPanel, BorderLayout.NORTH);
+        trackSavingsArea.add(centerPanel, BorderLayout.CENTER);
+
         trackSavingsArea.setVisible(false);
-        trackSavingsArea.setLayout(new GridLayout(2, 2));
-
-        trackSavingsArea.add(trackSavingsLabel);
-        trackSavingsArea.add(addSavings);
-
-        trackSavingsArea.add(savingAmountLabel);
-        trackSavingsArea.add(savingNameLabel);
         refreshTrackSavings();
     }
 
     public static void swtichToTrackSavings() {
-        trackSavingsArea.setVisible(true);
         refreshTrackSavings();
+        trackSavingsArea.setVisible(true);
     }
 
     public static void switchFromTrackSavings() {
@@ -71,29 +81,41 @@ public class TrackSavingsPage {
     }
 
     public static void refreshTrackSavings() {
-        trackSavingsArea.removeAll();
-        trackSavingsArea.add(trackSavingsLabel);
-        trackSavingsArea.add(addSavings);
-        trackSavingsArea.add(savingAmountLabel);
-        trackSavingsArea.add(savingNameLabel);
+        if (listPanel == null) {
+            return;
+        }
+
+        listPanel.removeAll();
+
+        listPanel.add(new JLabel("Name"));
+        listPanel.add(new JLabel("Amount"));
+        listPanel.add(new JLabel("Action"));
+
         if (User.getSavingGoals() != null) {
             for (SavingGoal sg : User.getSavingGoals()) {
-                JTextArea goalName = new JTextArea(sg.getName());
-                JTextArea goalAmount = new JTextArea("$" + sg.getGoalAmount());
-                JButton removeGoal = new JButton("Remove Goal");
+                JLabel goalName = new JLabel(sg.getName());
+                JLabel goalAmount = new JLabel(String.format("$%.2f", sg.getGoalAmount()));
+
+                JButton removeGoal = new JButton("Remove");
                 removeGoal.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         User.removeSavingsGoal(sg.getName());
                         refreshTrackSavings();
                     }
                 });
-                trackSavingsArea.add(goalName);
-                trackSavingsArea.add(goalAmount);
-                trackSavingsArea.add(removeGoal);
-            }
 
+                listPanel.add(goalName);
+                listPanel.add(goalAmount);
+                listPanel.add(removeGoal);
+            }
         }
-        trackSavingsArea.revalidate();
-        trackSavingsArea.repaint();
+
+        listPanel.revalidate();
+        listPanel.repaint();
+
+        if (trackSavingsArea != null) {
+            trackSavingsArea.revalidate();
+            trackSavingsArea.repaint();
+        }
     }
 }
