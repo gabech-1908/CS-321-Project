@@ -205,5 +205,14 @@ public class Database {
             default:          return amount;
         }
     }
+   public static void close() {
+        try {
+            if (conn != null) {
+                conn.close();
+            }
+        } catch (Exception e) {
+            System.out.println("Error closing database: " + e.getMessage());
+        }
+    }
 }
  
