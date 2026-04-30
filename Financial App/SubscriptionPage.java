@@ -70,7 +70,7 @@ public class SubscriptionPage {
         inputPanel.add(addButton);
         inputPanel.add(errorLabel);
 
-        // ── South: subscription list + total ────────────────────────────────
+        // subscription list and total
         JPanel bottomPanel = new JPanel(new BorderLayout());
         subscriptionListArea = new JTextArea(10, 30);
         subscriptionListArea.setEditable(false);
@@ -128,11 +128,11 @@ public class SubscriptionPage {
         sb.append("-".repeat(45)).append("\n");
 
         double monthlyTotal = 0;
-        if (User.getSubscriptions() == null || User.getSubscriptions().isEmpty()) {
+        List<Subscription> subscriptions = Database.getSubscriptions();
+        if (subscriptions.isEmpty()) {
             sb.append("No subscriptions added yet.");
         } else {
-            // if User doesn't have subs then print subs
-            for (Subscription s : User.getSubscriptions()) {
+            for (Subscription s : subscriptions) {
                 sb.append(String.format("%-20s $%-9.2f %s%n", s.getTitle(), s.getAmount(), s.getFrequency()));
                 monthlyTotal += toMonthly(s.getAmount(), s.getFrequency());
             }
