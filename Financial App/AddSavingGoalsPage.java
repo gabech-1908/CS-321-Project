@@ -63,6 +63,24 @@ public class AddSavingGoalsPage {
             }
         });
 
+        JPanel topPanel = new JPanel(new BorderLayout());
+        JButton backButton = new JButton("Home");
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                switchFromAddSavingsGoals();
+                HomePage.switchToHome();
+            }
+        });
+        JButton signoutButton = new JButton("Sign Out");
+        signoutButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                switchFromAddSavingsGoals();
+                LoginPage.switchToLogin();
+            }
+        });
+        topPanel.add(backButton, BorderLayout.WEST);
+        topPanel.add(signoutButton, BorderLayout.EAST);
+
         addSavingsArea = new JPanel();
         addSavingsArea.setLayout(new GridLayout(2, 2));
 
