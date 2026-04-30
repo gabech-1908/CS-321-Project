@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.net.URL;
+import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -13,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class HomePage {
 
@@ -206,27 +209,116 @@ public class HomePage {
     }
 
     private static JPanel buildWeeklyPanel() {
+        Font bigFont = new Font("SansSerif", Font.PLAIN, 14);
         JPanel panel = new JPanel(new BorderLayout());
-
-        JLabel label = new JLabel(
+ 
+        JTextArea weeklyAvgArea = new JTextArea(
             String.format("Total Weekly Spending: $%.2f", Database.getTotalSpending())
         );
-        label.setBorder(BorderFactory.createEmptyBorder(8,8,8,8));
-
-        panel.add(label, BorderLayout.NORTH);
+        weeklyAvgArea.setFont(bigFont);
+        weeklyAvgArea.setEditable(false);
+ 
+        // build spending list grouped by day
+        JPanel displayExpensesArea = new JPanel(new GridLayout(0, 3, 4, 4));
+        String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+ 
+        List<SpendingPage.SpendingEntry> entries = Database.getSpending();
+ 
+        for (String day : days) {
+            boolean addedDay = false;
+            for (SpendingPage.SpendingEntry e : entries) {
+                if (e.day.equals(day)) {
+                    if (!addedDay) {
+                        JTextArea dayLabel = new JTextArea(day);
+                        dayLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
+                        dayLabel.setEditable(false);
+                        displayExpensesArea.add(dayLabel);
+                        addedDay = true;
+                    } else {
+                        displayExpensesArea.add(new JTextArea());
+                    }
+                    displayExpensesArea.add(new JTextArea(e.description));
+                    displayExpensesArea.add(new JTextArea(String.format("$%.2f", e.amount)));
+                }
+            }
+        }
+ 
+        if (entries.isEmpty()) {
+            JTextArea empty = new JTextArea("No spending entries yet.");
+            empty.setEditable(false);
+            panel.add(empty, BorderLayout.CENTER);
+            return panel;
+        }
+ 
+        panel.add(weeklyAvgArea, BorderLayout.NORTH);
+        panel.add(new JScrollPane(displayExpensesArea), BorderLayout.CENTER);
         return panel;
     }
 
     private static JPanel buildMonthlyPanel() {
         JPanel panel = new JPanel(new BorderLayout());
+ 
+        List<Subscription> subs = Database.getSubscriptions();
+        List<SpendingPage.SpendingEntry> spending = Database.getSpending();
+ 
+        if (subs.isEmpty() && spending.isEmpty()) {
+            JTextArea empty = new JTextArea("No data available.");
+            empty.setEditable(false);
+            panel.add(empty, BorderLayout.CENTER);
+            return panel;
+        }
+ 
+        // build pie chart from subscription data
+       java.util.LinkedHashMap<String, Double> combined = new java.util.LinkedHashMap<>();
 
-        JLabel label = new JLabel(
-            String.format("Total Monthly Spending: $%.2f", Database.getTotalSpending())
+        for (Subscription s : subs) {
+            combined.merge(s.getTitle(), toMonthly(s.getAmount(), s.getFrequency()), Double::sum);
+        }
+        for (SpendingPage.SpendingEntry e : spending) {
+            combined.merge(e.description, e.amount, Double::sum);
+        }
+
+        String[] labels = combined.keySet().toArray(new String[0]);
+        double[] values = new double[labels.length];
+        java.awt.Color[] colors = {
+            new java.awt.Color(239, 83, 80),
+            new java.awt.Color(66, 165, 245),
+            new java.awt.Color(102, 187, 106),
+            new java.awt.Color(255, 202, 40),
+            new java.awt.Color(171, 71, 188),
+            new java.awt.Color(255, 112, 67),
+            new java.awt.Color(38, 166, 154)
+        };
+
+        double monthlyTotal = 0;
+        for (int i = 0; i < labels.length; i++) {
+            values[i] = combined.get(labels[i]);
+            monthlyTotal += values[i];
+        }
+
+ 
+        JTextArea totalArea = new JTextArea(
+            String.format("Total Monthly Spending: $%.2f", monthlyTotal)
         );
-        label.setBorder(BorderFactory.createEmptyBorder(8,8,8,8));
-
-        panel.add(label, BorderLayout.NORTH);
+        totalArea.setFont(new Font("SansSerif", Font.PLAIN, 14));
+        totalArea.setEditable(false);
+ 
+        PieChartPanel chart = new PieChartPanel(labels, values, colors);
+ 
+        panel.add(totalArea, BorderLayout.NORTH);
+        panel.add(chart, BorderLayout.CENTER);
         return panel;
+    }
+
+    private static double toMonthly(double amount, String frequency) {
+        switch (frequency) {
+            case "Weekly":    return amount * 4.33;
+            case "Bi-Weekly": return amount * 2.17;
+            case "Monthly":   return amount;
+            case "Quarterly": return amount / 3.0;
+            case "Annually":  return amount / 12.0;
+            default:          return amount;
+        }
     }
 
     public static JPanel getHomeArea() {
