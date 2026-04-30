@@ -8,12 +8,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 //import to make the interface look better
-//import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMTGitHubIJTheme;
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMTGitHubIJTheme;
 
 public class Main {
     public static void main(String[] args) {
         // initialize frame
-        // FlatMTGitHubIJTheme.setup(); //start the ui
+        FlatMTGitHubIJTheme.setup(); //start the ui
         Database.init(); // initialize database connection and tables
 
         // might not need this one
