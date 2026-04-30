@@ -59,9 +59,10 @@ public class LoginPage {
 
                     LinkedList<SavingGoal> sg = new LinkedList<>();
                     LinkedList<Subscription> s = new LinkedList<>();
+                    LinkedList<SpendingEntry> se = new LinkedList<>();
                     double b = 0;
 
-                    User.initUser(sg, b, s);
+                    User.initUser(sg, b, s, se);
 
                     switchToHome();
                     HomePage.switchToHome();
