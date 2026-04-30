@@ -134,6 +134,9 @@ public class AddSavingGoalsPage {
     }
 
     public static void switchFromAddSavingsGoals() {
+        goalAmount.setText("");
+        nameOfGoal.setText("");
+        goalDeadline.setText("");
         addSavingsArea.setVisible(false);
     }
 
