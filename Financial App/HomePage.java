@@ -18,8 +18,8 @@ public class HomePage {
 
     private static JPanel homeArea;
 
-    private static JButton weeklyOverviewButton;
-    private static JButton monthlyOverviewButton;
+    //private static JButton weeklyOverviewButton;
+    //private static JButton monthlyOverviewButton;
     private static JButton signOutButton;
 
     private static JButton subscriptionButton;
@@ -48,8 +48,8 @@ public class HomePage {
         Dimension logoSize = new Dimension(160, 80);
         setLogoIconIfFound(logoLabel, logoSize);
 
-        weeklyOverviewButton = new JButton("Weekly Overview");
-        monthlyOverviewButton = new JButton("Monthly Overview");
+        //weeklyOverviewButton = new JButton("Weekly Overview");
+        //monthlyOverviewButton = new JButton("Monthly Overview");
         signOutButton = new JButton("Sign Out");
 
         subscriptionButton = new JButton("Add Subscriptions");
@@ -58,8 +58,8 @@ public class HomePage {
         savingsButton = new JButton("Add Savings");
 
         JButton[] buttons = {
-            weeklyOverviewButton,
-            monthlyOverviewButton,
+            //weeklyOverviewButton,
+            //monthlyOverviewButton,
             subscriptionButton,
             incomeButton,
             spendingButton,
@@ -92,15 +92,15 @@ public class HomePage {
         tabs.addTab("Monthly Overview", monthlyTabPanel);
 
         // Actions
-        weeklyOverviewButton.addActionListener(e -> {
-            switchOutOfHome();
-            WeeklyOverviewPage.switchToWeeklyOverview();
-        });
+        //weeklyOverviewButton.addActionListener(e -> {
+       //     switchOutOfHome();
+         //   WeeklyOverviewPage.switchToWeeklyOverview();
+        //});
 
-        monthlyOverviewButton.addActionListener(e -> {
-            switchOutOfHome();
-            MonthlyOverviewPage.switchToMonthlyOverview();
-        });
+        //monthlyOverviewButton.addActionListener(e -> {
+        //    switchOutOfHome();
+        //    MonthlyOverviewPage.switchToMonthlyOverview();
+        //});
 
         signOutButton.addActionListener(e -> {
             switchOutOfHome();
@@ -139,9 +139,9 @@ public class HomePage {
         header.add(rightPanel, BorderLayout.EAST);
 
         // ===== CENTER =====
-        JPanel overviewButtons = new JPanel(new GridLayout(1, 2, 15, 0));
-        overviewButtons.add(weeklyOverviewButton);
-        overviewButtons.add(monthlyOverviewButton);
+        //JPanel overviewButtons = new JPanel(new GridLayout(1, 2, 15, 0));
+        //overviewButtons.add(weeklyOverviewButton);
+        //overviewButtons.add(monthlyOverviewButton);
 
         JPanel actionButtons = new JPanel(new GridLayout(2, 2, 15, 15));
         actionButtons.add(subscriptionButton);
@@ -154,7 +154,7 @@ public class HomePage {
 
         center.add(tabs);
         center.add(Box.createVerticalStrut(20));
-        center.add(overviewButtons);
+        //center.add(overviewButtons);
         center.add(Box.createVerticalStrut(25));
         center.add(actionButtons);
 
