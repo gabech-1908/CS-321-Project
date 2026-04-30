@@ -28,6 +28,25 @@ public class TrackSavingsPage {
                 AddSavingGoalsPage.switchToAddSavingGoals();
             }
         });
+
+        JPanel topPanel = new JPanel(new BorderLayout());
+        JButton backButton = new JButton("Home");
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                switchFromTrackSavings();
+                HomePage.switchToHome();
+            }
+        });
+        JButton signoutButton = new JButton("Sign Out");
+        signoutButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                switchFromTrackSavings();
+                LoginPage.switchToLogin();
+            }
+        });
+        topPanel.add(backButton, BorderLayout.WEST);
+        topPanel.add(signoutButton, BorderLayout.EAST);
+        
         trackSavingsArea.setLayout(new GridLayout(2, 2));
 
         trackSavingsArea.add(trackSavingsLabel);
